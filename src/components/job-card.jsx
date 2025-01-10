@@ -36,20 +36,30 @@ const JobCard = ({
   } = useFetch(saveJob);
 
   const handleSaveJob = async () => {
-    await fnSavedJob({
-      user_id: user.id,
-      job_id: job.id,
-    });
-    onJobAction();
+    try {
+      await fnSavedJob({
+        user_id: user.id,
+        job_id: job.id,
+      });
+      onJobAction();
+    } catch (error) {
+      console.error("Error saving job:", error);
+    }
   };
 
   const handleDeleteJob = async () => {
-    await fnDeleteJob();
-    onJobAction();
+    try {
+      await fnDeleteJob();
+      onJobAction();
+    } catch (error) {
+      console.error("Error deleting job:", error);
+    }
   };
 
   useEffect(() => {
-    if (savedJob !== undefined) setSaved(savedJob?.length > 0);
+    if (savedJob !== undefined && savedJob !== null) {
+      setSaved(savedJob?.length > 0);
+    }
   }, [savedJob]);
 
   return (
@@ -72,7 +82,11 @@ const JobCard = ({
       </CardHeader>
       <CardContent className="flex flex-col gap-4 flex-1">
         <div className="flex justify-between">
-          {job.company && <img src={job.company.logo_url} className="h-6" />}
+          {job.company && job.company.logo_url ? (
+            <img src={job.company.logo_url} className="h-6" />
+          ) : (
+            <img src="fallback_image_url.jpg" className="h-6" />
+          )}
           <div className="flex gap-2 items-center">
             <MapPinIcon size={15} /> {job.location}
           </div>

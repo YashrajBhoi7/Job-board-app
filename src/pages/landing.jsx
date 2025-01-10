@@ -1,10 +1,10 @@
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "../components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/card";
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
-} from "@/components/ui/carousel";
+} from "../components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
 import companies from "../data/companies.json";
 import faqs from "../data/faq.json";
@@ -13,7 +13,7 @@ import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "@/components/ui/accordion";
+} from "../components/ui/accordion";
 import { Link } from "react-router-dom";
 
 const LandingPage = () => {
